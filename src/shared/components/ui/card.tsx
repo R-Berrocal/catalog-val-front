@@ -12,21 +12,33 @@ type PropsCardDefault = {
   title: string;
   price: number;
   image: string;
+  children?: React.ReactNode;
+  classCardHeader?: string;
 };
 
-export function CardDefault({ id, title, price, image }: PropsCardDefault) {
+export function CardDefault({
+  id,
+  title,
+  price,
+  image,
+  classCardHeader,
+  children,
+}: PropsCardDefault) {
   const { showDialog } = usePersistedStore((state) => state);
   return (
     <Card
-      className="flex items-center shadow-2xl cursor-pointer "
+      className="flex items-center shadow-2xl cursor-pointer"
       onClick={() => showDialog(id)}
+      style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <CardHeader color="blue-gray" className="w-full h-full">
-        <img
-          src={image}
-          alt="card-image"
-          className="w-full h-auto shadow-2xl"
-        />
+      <CardHeader color="blue-gray" className={classCardHeader}>
+        {children ?? (
+          <img
+            src={image}
+            alt="card-image"
+            className="w-full h-auto shadow-2xl"
+          />
+        )}
       </CardHeader>
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2">
@@ -55,6 +67,7 @@ export function CardGrid({ products }: DataGrid) {
           price={product.price}
           title={product.name}
           image={product.image}
+          classCardHeader="w-full h-full"
         />
       ))}
     </div>

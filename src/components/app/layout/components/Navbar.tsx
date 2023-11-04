@@ -7,6 +7,7 @@ import {
 } from '@material-tailwind/react';
 import {
   Bars3Icon,
+  ShoppingCartIcon,
   UserCircleIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
@@ -21,12 +22,14 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <NavLink
+          to="/product"
           className="flex items-center hover:text-blue-500 transition-colors"
         >
-          Item 1
-        </a>
+          <Typography variant="h6" className="flex">
+            Productos <ShoppingCartIcon className="w-6 h-6" />
+          </Typography>
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -34,12 +37,12 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <NavLink
+          to="/product"
           className="flex items-center hover:text-blue-500 transition-colors"
         >
-          item 2
-        </a>
+          <Typography className="flex">Item 2</Typography>
+        </NavLink>
       </Typography>
       <Typography
         as="li"
@@ -47,7 +50,12 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        item 3
+        <NavLink
+          to="/auth/login"
+          className="flex items-center hover:text-blue-500 transition-colors"
+        >
+          Item 3
+        </NavLink>
       </Typography>
       <Typography
         as="li"

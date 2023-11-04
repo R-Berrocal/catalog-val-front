@@ -4,6 +4,7 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { RoutesModel } from './model';
 
 const Home = lazy(() => import('../../pages/home'));
+const Product = lazy(() => import('../../pages/product'));
 
 import PageNotFound from '../../pages/error';
 import { Spinner } from '../../../shared/components/ui';
@@ -13,6 +14,11 @@ const routes: RoutesModel = [
     name: 'home',
     path: '/',
     component: <Home />,
+  },
+  {
+    name: 'product',
+    path: 'product/*',
+    component: <Product />,
   },
 ];
 
