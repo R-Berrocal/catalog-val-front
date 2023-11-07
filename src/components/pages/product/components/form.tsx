@@ -2,8 +2,29 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Card } from '@material-tailwind/react';
 import { useForm } from 'react-hook-form';
 import { Input, Textarea } from '../../../../shared/components/form';
+import { useDropzone } from 'react-dropzone';
 
 export default function ProductForm() {
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+    accept: {
+      'image/png': [],
+      'image/jpg': [],
+      'image/jpeg': [],
+    },
+  });
+
+  const files = acceptedFiles.map((file) => {
+    return (
+      <div key={file.name} className="p-4 rounded-lg flex flex-col">
+        <img
+          className="rounded-lg w-full h-full object-cover"
+          src={URL.createObjectURL(file)}
+          alt={file.name}
+        />
+      </div>
+    );
+  });
+
   const navigate = useNavigate();
   const { control } = useForm({
     mode: 'all',
@@ -39,22 +60,20 @@ export default function ProductForm() {
             errorMessage={''}
             type="number"
           />
-
-          <Input
-            style={{
-              display: 'inline-block',
-              padding: '8px 12px',
-              fontSize: '14px',
-              cursor: 'pointer',
-            }}
-            className="custom-file-input"
-            control={control}
-            name="file"
-            label="Seleccione los archivos"
-            errorMessage={''}
-            multiple
-            type="file"
-          />
+          <section
+            className="flex flex-col justify-center items-center border border-blue-gray-200 rounded-md cursor-pointer"
+            {...getRootProps()}
+          >
+            <input {...getInputProps()} />
+            {files.length > 0 ? (
+              <div className="grid grid-cols-3">{files}</div>
+            ) : (
+              <p className="text-sm text-blue-gray-500 text-center">
+                Arrastre y suelte algunas imagenes aquí o haga clic para
+                seleccionar archivos
+              </p>
+            )}
+          </section>
         </div>
         <div className="flex gap-5  justify-center items-center mt-5">
           <Button type="submit">Crear</Button>

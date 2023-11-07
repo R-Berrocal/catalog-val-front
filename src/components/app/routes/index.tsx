@@ -1,9 +1,15 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from 'react-router-dom';
 
 import { RoutesModel } from './model';
 
-const Home = lazy(() => import('../../pages/home'));
+// const Home = lazy(() => import('../../pages/home'));
 const Product = lazy(() => import('../../pages/product'));
 
 import PageNotFound from '../../pages/error';
@@ -13,7 +19,7 @@ const routes: RoutesModel = [
   {
     name: 'home',
     path: '/',
-    component: <Home />,
+    component: <Navigate to="/product" />,
   },
   {
     name: 'product',
